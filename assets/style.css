@@ -8,3 +8,19 @@
 .text-green-700{color:#15803d}
 .accent-blue-700{accent-color:var(--color-blue-700)}
 :where(.space-y-3>:not(:last-child)){--tw-space-y-reverse:0;margin-block-start:calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));margin-block-end:calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)))}
+:where(.space-y-2>:not(:last-child)){--tw-space-y-reverse:0;margin-block-start:calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));margin-block-end:calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)))}
+.text-5xl{font-size:var(--text-5xl);line-height:var(--tw-leading,var(--text-5xl--line-height))}
+.text-6xl{font-size:var(--text-6xl);line-height:var(--tw-leading,var(--text-6xl--line-height))}
+.text-blue-100{color:var(--color-blue-100)}
+.text-green-400{color:var(--color-green-400)}
+.z-10{z-index:10}
+.pb-4{padding-bottom:calc(var(--spacing) * 4)}
+.pb-6{padding-bottom:calc(var(--spacing) * 6)}
+.pt-10{padding-top:calc(var(--spacing) * 10)}
+.px-5{padding-inline:calc(var(--spacing) * 5)}
+.py-2\.5{padding-block:calc(var(--spacing) * 2.5)}
+.leading-none{line-height:1}
+@media(hover:hover){.hover\:shadow-md:hover{--tw-shadow:0 4px 6px -1px var(--tw-shadow-color,#0000001a), 0 2px 4px -2px var(--tw-shadow-color,#0000001a);box-shadow:var(--tw-inset-shadow),var(--tw-inset-ring-shadow),var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}}
+@media(min-width:40rem){.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:48rem){.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.md\:p-8{padding:calc(var(--spacing) * 8)}}
+@media(min-width:64rem){.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}

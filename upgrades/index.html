@@ -75,7 +75,7 @@
   <div class="max-w-xl mx-auto px-4">
     <h2 class="text-3xl font-extrabold text-blue-950 mb-2 text-center">Request an Upgrade</h2>
     <p class="text-gray-600 text-center mb-8">Tell us which upgrade(s) you'd like and the address of your listing. We'll follow up to confirm details and get it added.</p>
-    <form name="upgrade-request" method="POST" data-netlify="true" class="bg-white rounded-2xl p-6 md:p-8 shadow-xl text-gray-900 space-y-4">
+    <form id="upgrade-request-form" name="upgrade-request" method="POST" data-netlify="true" class="bg-white rounded-2xl p-6 md:p-8 shadow-xl text-gray-900 space-y-4">
       <input type="hidden" name="form-name" value="upgrade-request">
       <div class="grid sm:grid-cols-2 gap-4">
         <input required name="first_name" placeholder="First Name" class="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -92,8 +92,39 @@
       <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-950 font-bold rounded-full px-8 py-4 transition-colors">Request This Upgrade &rarr;</button>
       <p class="text-gray-500 text-xs text-center">We'll follow up by email or phone to confirm and collect payment for the upgrade(s) you selected.</p>
     </form>
+    <div id="upgrade-request-success" class="hidden bg-white rounded-2xl p-6 md:p-8 shadow-xl text-gray-900 text-center">
+      <div class="text-4xl mb-3">&#9989;</div>
+      <h3 class="text-2xl font-extrabold text-blue-950 mb-2">Request Received!</h3>
+      <p class="text-gray-600">We've got your upgrade request and will follow up by email or phone to confirm details and collect payment.</p>
+    </div>
   </div>
 </section>
+<script>
+(function() {
+  var form = document.getElementById('upgrade-request-form');
+  if (!form) return;
+  var success = document.getElementById('upgrade-request-success');
+  var btn = form.querySelector('button[type="submit"]');
+  var originalText = btn ? btn.textContent : '';
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+    var body = new URLSearchParams(new FormData(form)).toString();
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body
+    }).then(function(res) {
+      if (!res.ok) throw new Error('Submit failed');
+      form.style.display = 'none';
+      if (success) success.classList.remove('hidden');
+    }).catch(function() {
+      if (btn) { btn.disabled = false; btn.textContent = originalText; }
+      alert('Something went wrong submitting the form. Please try again, or call/email us directly.');
+    });
+  });
+})();
+</script>
 
 <section class="max-w-4xl mx-auto px-4 py-16">
   <h2 class="text-3xl font-extrabold text-center mb-8 text-blue-950">Frequently Asked Questions</h2>

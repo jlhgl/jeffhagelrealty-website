@@ -183,7 +183,7 @@
   <div class="max-w-2xl mx-auto px-4">
     <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-2">Ready to List Your Home?</h2>
     <p class="text-blue-100 text-center mb-10">Get your complete MLS listing for one $99 flat fee. No commission, no upgrades, no hidden fees.</p>
-    <form name="get-started-landing" method="POST" data-netlify="true" class="bg-white rounded-2xl p-6 md:p-8 shadow-2xl text-gray-900 space-y-4">
+    <form id="get-started-landing-form" name="get-started-landing" method="POST" data-netlify="true" class="bg-white rounded-2xl p-6 md:p-8 shadow-2xl text-gray-900 space-y-4">
       <input type="hidden" name="form-name" value="get-started-landing">
       <div class="grid sm:grid-cols-2 gap-4">
         <input required name="first_name" placeholder="First Name" class="border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -198,6 +198,36 @@
       <button type="submit" class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-950 font-bold rounded-full px-8 py-4 transition-colors">Get Started to Save &rarr;</button>
       <p class="text-gray-500 text-xs text-center">No hidden fees. One flat fee. No commission, ever.</p>
     </form>
+    <div id="get-started-landing-success" class="hidden bg-white rounded-2xl p-6 md:p-8 shadow-2xl text-gray-900">
+      <div class="text-center mb-6">
+        <div class="text-4xl mb-3">&#9989;</div>
+        <h3 class="text-2xl font-extrabold text-blue-950 mb-2">You're All Set!</h3>
+        <p class="text-gray-600">We've got your information and will email you everything you need to get your listing live. In the meantime, here's how to keep things moving:</p>
+      </div>
+      <div class="space-y-4">
+        <a href="https://house-frame-gallery.lovable.app/start" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all p-4">
+      <div class="text-blue-700 font-black text-xl flex-shrink-0">01</div>
+      <div>
+        <div class="font-semibold text-blue-950">Get Started</div>
+        <div class="text-gray-600 text-sm">Click here to begin your listing &rarr;</div>
+      </div>
+    </a>
+<a href="https://listing-pic-spark.lovable.app" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all p-4">
+      <div class="text-blue-700 font-black text-xl flex-shrink-0">02</div>
+      <div>
+        <div class="font-semibold text-blue-950">Submit Your Photos</div>
+        <div class="text-gray-600 text-sm">Upload your property photos &rarr;</div>
+      </div>
+    </a>
+<a href="https://house-frame-gallery.lovable.app/paperwork" target="_blank" rel="noopener" class="flex items-start gap-4 bg-white rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-md transition-all p-4">
+      <div class="text-blue-700 font-black text-xl flex-shrink-0">03</div>
+      <div>
+        <div class="font-semibold text-blue-950">Complete the Listing Agreement</div>
+        <div class="text-gray-600 text-sm">For Sale — sign your listing agreement &rarr;</div>
+      </div>
+    </a>
+      </div>
+    </div>
   </div>
 </section>
 <footer class="bg-gray-900 text-white py-14 mt-16">
@@ -233,6 +263,32 @@
 </footer>
 </body>
 </html>
+<script>
+(function() {
+  var form = document.getElementById('get-started-landing-form');
+  if (!form) return;
+  var success = document.getElementById('get-started-landing-success');
+  var btn = form.querySelector('button[type="submit"]');
+  var originalText = btn ? btn.textContent : '';
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+    var body = new URLSearchParams(new FormData(form)).toString();
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body
+    }).then(function(res) {
+      if (!res.ok) throw new Error('Submit failed');
+      form.style.display = 'none';
+      if (success) success.classList.remove('hidden');
+    }).catch(function() {
+      if (btn) { btn.disabled = false; btn.textContent = originalText; }
+      alert('Something went wrong submitting the form. Please try again, or call/email us directly.');
+    });
+  });
+})();
+</script>
 
 <script>
 (function() {

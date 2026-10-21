@@ -28,6 +28,7 @@
 :where(.space-y-5>:not(:last-child)){--tw-space-y-reverse:0;margin-block-start:calc(calc(var(--spacing) * 5) * var(--tw-space-y-reverse));margin-block-end:calc(calc(var(--spacing) * 5) * calc(1 - var(--tw-space-y-reverse)))}
 .border-blue-200{border-color:var(--color-blue-200)}
 .border-collapse{border-collapse:collapse}
+.border-gray-100{border-color:#f3f4f6}
 .border-yellow-400{border-color:var(--color-yellow-400)}
 .gap-5{gap:calc(var(--spacing) * 5)}
 .pr-4{padding-right:calc(var(--spacing) * 4)}
